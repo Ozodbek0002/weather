@@ -1,8 +1,10 @@
 
-
 <?php
+
 error_reporting(0);
 // https://openweathermap.org/current  --> bilib oling
+
+
 if (array_key_exists('submit',$_GET)){
 
     if (!$_GET['city']){
@@ -21,23 +23,23 @@ if (array_key_exists('submit',$_GET)){
         if ($weatherArray['cod']==200){
 
             $temp = $weatherArray['main']['temp']-273;
-            $tempCelsius = " <b>  Harorat:  </b> ".intval($temp)."&deg;C";
+            $tempCelsius = " <b>  </b> ".intval($temp)."&deg;C";
 
-            $weather = " <b>  Holat:  </b>  ".$weatherArray['weather']['0']['description'];
+            $weather = " <b>   </b>  ".$weatherArray['weather']['0']['description'];
 
-            $country = " <b>  Joy:  </b>  ".$weatherArray['sys']['country']." ".$weatherArray['name'];
+            $country = " <b>   </b>  ".$weatherArray['sys']['country']." ".$weatherArray['name'];
 
-            $press = " <b>  Bosim:  </b>  ".$weatherArray['main']['pressure']." hPa";
+            $press = " <b>   </b>  ".$weatherArray['main']['pressure']." hPa";
 
-            $wind = " <b>  Shamol:  </b>  ".$weatherArray['wind']['speed']." metr/sec ";
+            $wind = " <b>   </b>  ".$weatherArray['wind']['speed']." metr/sec ";
 
-            $clouds = " <b>  Bulutli:  </b>  ".$weatherArray['clouds']['all']." % ";
+            $clouds = " <b>  </b>  ".$weatherArray['clouds']['all']." % ";
 
             date_default_timezone_set("Asia/Tashkent");
             $sunrise = $weatherArray['sys']['sunrise'];
 
-            $sun = " <b>  Quyosh Chiqishi:  </b>  ".date(" g:i a", $sunrise);
-            $current = " <b>  Joriy Vaqt:  </b>  ".date(" F j, Y, g:i a");
+            $sun = " <b>  </b>  ".date(" g:i a", $sunrise);
+            $current = " <b>    </b>  ".date(" F j, Y, g:i a");
 
         }
         else{
@@ -86,7 +88,7 @@ if (array_key_exists('submit',$_GET)){
                 text-align: center;
                 justify-content: center;
                 align-items: center;
-                width: 440px;
+                /*width: 440px;*/
             }
             h1{
                 font-weight: 700;
@@ -94,9 +96,10 @@ if (array_key_exists('submit',$_GET)){
 
             }
             input{
-                width: 350px;
+                width: 300px;
                 padding: 5px;
             }
+
 
         </style>
 
@@ -104,7 +107,7 @@ if (array_key_exists('submit',$_GET)){
 
     <body>
 
-        <div class="container">
+        <div class="container " style="max-width: 450px;">
 
         <form action="" method="get">
             <h1> Global ob-havo  </h1>
@@ -118,20 +121,66 @@ if (array_key_exists('submit',$_GET)){
 
             <div class="output mt-3">
 
+
                 <?php
 
                 if ($weather){
-                    echo '<div class="alert alert-success" role="alert" >'
-                            .$country.'<br>'
-                            .$weather.'<br>'
-                            .$tempCelsius.'<br>'
-                            .$clouds.'<br>'
-                            .$press.'<br>'
-                            .$wind.'<br>'
-                            .$sun.'<br>'
-                            .$current.'<br>'
+                    ?>
+                    <div class="alert alert-success" role="alert" style="height: 300px;" >
+                        <table class="text-center  " style=" ">
+                            <tr class="" >
+                                <th>Joy:</th>
+                                <td><?php
+                                    echo $country;
+                                    ?></td>
+                            </tr>
+                            <tr>
+                                <th>Holat:</th>
+                                <td><?php
+                                    echo $weather;
+                                    ?></td>
+                            </tr>
+                            <tr>
+                                <th>Harorat:</th>
+                                <td><?php
+                                    echo $tempCelsius;
+                                    ?></td>
+                            </tr>
+                            <tr>
+                                <th>Bulutli:</th>
+                                <td><?php
+                                    echo $clouds;
+                                    ?></td>
+                            </tr>
+                            <tr>
+                                <th>Bosim:</th>
+                                <td><?php
+                                    echo $press;
+                                    ?></td>
+                            </tr>
+                            <tr>
+                                <th>Shamol:</th>
+                                <td><?php
+                                    echo $wind;
+                                    ?></td>
+                            </tr>
+                            <tr>
+                                <th>Quyosh Chiqishi:</th>
+                                <td><?php
+                                    echo $sun;
+                                    ?></td>
+                            </tr>
+                            <tr>
+                                <th>Joriy vaqt:</th>
+                                <td><?php
+                                    echo $current;
+                                    ?></td>
+                            </tr>
 
-                        .'</div>';
+                        </table>
+
+                    </div
+                    <?php
                 }
 
                 if($error)
@@ -142,10 +191,6 @@ if (array_key_exists('submit',$_GET)){
 
         </form>
     </div>
-
-
-
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
